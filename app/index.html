@@ -1,0 +1,71 @@
+<!DOCTYPE html ng-app="myApp">
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components\font-awesome\css\font-awesome.min.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+   <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+   <div ng-controller="ViewCtrl">
+     <h1>Students Table</h1>
+     <table class="table table-bordered table-stripped">
+       <thead>
+       <th ng-click="sort('id')">Id <i class="fa fa-sort" aria-hidden="true"></i> </th>
+       <th ng-click="sort('name')">Name <i class="fa fa-sort" aria-hidden="true"></i></th>
+       <th ng-click="sort('age')">Age <i class="fa fa-sort" aria-hidden="true"></i></th>
+       <th ng-click="sort('branch')">Branch <i class="fa fa-sort" aria-hidden="true"></i></th>
+       <th ng-click="sort('attendance')">Attendance <i class="fa fa-sort" aria-hidden="true"></i></th>
+       <th ng-click="sort('marks')">Marks <i class="fa fa-sort" aria-hidden="true"></i></th>
+       <th>Action</th>
+       </thead>
+       <tbody>
+       <tr><input ng-model="filterBy" placeholder="Search" class="form-control">
+        <br>
+       </tr>
+       <tr ng-repeat="std in students | orderBy : predicate | filter : filterBy">
+         <td ng-bind="std.id"></td>
+         <td ng-if="!std.isSave" ng-bind="std.name"></td>
+         <td ng-if="!std.isSave" ng-bind="std.age"></td>
+         <td ng-if="!std.isSave" ng-bind="std.branch"></td>
+         <td ng-if="!std.isSave" ng-bind="std.attendance"></td>
+         <td ng-if="!std.isSave" ng-bind="std.marks"></td>
+
+         <td ng-if="std.isSave"><input ng-model="std.name"></td>
+         <td ng-if="std.isSave"><input ng-model="std.age"></td>
+         <td ng-if="std.isSave"><input ng-model="std.branch"></td>
+         <td ng-if="std.isSave"><input ng-model="std.attendance"></td>
+         <td ng-if="std.isSave"><input ng-model="std.marks"></td>
+
+         <td ng-if="!std.isSave"><button class="btn btn-primary" ng-click="std.isSave = !std.isSave"> Edit </button></td>
+         <td ng-if="std.isSave"><button class="btn btn-success"  ng-click="std.isSave = !std.isSave"> Save </button></td>
+       </tr>
+       </tbody>
+     </table>
+   </div>
+
+
+   <!--<div>Angular seed app: v<span app-version></span></div>-->
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
